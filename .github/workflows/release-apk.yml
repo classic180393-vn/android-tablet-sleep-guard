@@ -1,0 +1,59 @@
+name: Release APK
+
+on:
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to attach prebuilt APK to (e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-attach-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve Release Tag
+        id: rel
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TAG="${{ github.event.inputs.tag }}"
+          else
+            TAG="${{ github.event.release.tag_name }}"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.rel.outputs.tag }}
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Signed BT Helper APK
+        run: |
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          BT_DIR="$(find "$SDK_ROOT/build-tools" -maxdepth 1 -mindepth 1 -type d | sort -V | tail -n 1)"
+          JAR_PATH="$(find "$SDK_ROOT/platforms" -maxdepth 2 -name 'android.jar' | sort -V | tail -n 1)"
+          export PATH="$BT_DIR:$PATH"
+          export ANDROID_JAR="$JAR_PATH"
+          export USE_EPHEMERAL_KEYSTORE=1
+          export OUT_APK="${{ runner.temp }}/atsg_btbattery.apk"
+          bash android/bt-battery-helper/build.sh
+          apksigner verify --print-certs "$OUT_APK"
+          (cd "${{ runner.temp }}" && sha256sum atsg_btbattery.apk > atsg_btbattery.apk.sha256)
+
+      - name: Attach APK to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "${{ steps.rel.outputs.tag }}" \
+            "${{ runner.temp }}/atsg_btbattery.apk" \
+            "${{ runner.temp }}/atsg_btbattery.apk.sha256" \
+            --clobber

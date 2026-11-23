@@ -1,0 +1,33 @@
+name: Device Compatibility Report
+description: Share tested tablet model, OEM ROM, and termux-sensor names to expand presets
+title: "[Device]: "
+labels: [ "device-report" ]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for testing **Android Tablet Sleep Guard**! Sharing your sensor names helps other users on the same tablet.
+  - type: input
+    id: device
+    attributes:
+      label: Tablet Model & Android / OEM ROM
+      placeholder: "e.g., Galaxy Tab S9 / OneUI 6.1 (Android 14) or Xiaomi Pad 6 / HyperOS"
+    validations:
+      required: true
+  - type: textarea
+    id: sensors
+    attributes:
+      label: Hall / Light Sensor Names (`termux-sensor -l`)
+      description: Optional output filtered for Hall / Magnetic / Light sensors (no personal data).
+      placeholder: |
+        Hall Sensor ...
+        Ambient Light Sensor ...
+  - type: textarea
+    id: results
+    attributes:
+      label: Observed Standby / Dark-Bag Results
+      placeholder: "e.g., Overnight drain dropped from ~2%/h to ~0.25%/h; Dark-Bag guard verified."
+  - type: textarea
+    id: oem_packages
+    attributes:
+      label: Safe Isolated OEM Bloatware Packages (Optional)
+      description: Only separate-UID packages (NEVER android.uid.system).

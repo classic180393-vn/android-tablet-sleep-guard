@@ -1,0 +1,25 @@
+name: Bug Report
+description: Report a bug in lid-guard, battery-habit, bt-tracker, or the Android APK helper
+title: "[Bug]: "
+labels: [ "bug" ]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      placeholder: Describe the issue and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      placeholder: |
+        - Node.js version:
+        - Android version / ROM:
+        - ADB mode (wireless / USB / offline):
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / relevant sanitized output
+      placeholder: Paste sanitized output from `tablet-guard status` or `npm test` (scrub personal paths if any).

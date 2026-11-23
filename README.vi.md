@@ -27,9 +27,11 @@ tablet-guard bt-sync        # Đo pin bàn phím/chuột/bút BT ngay lập tứ
 tablet-guard bt-report      # Xem tốc độ hao thực tế (%/ngày) của bàn phím rời
 ```
 
-## 4. Lưu ý an toàn với gói hệ thống OEM (ZUI / HyperOS / OneUI)
+## 4. Lưu ý an toàn với gói hệ thống OEM & Tải APK dựng sẵn
+- Nếu chỉ cần đo pin bàn phím Bluetooth rời mà không muốn tự biên dịch Java, tải sẵn `atsg_btbattery.apk` tại trang [**Releases**](https://github.com/classic180393-vn/android-tablet-sleep-guard/releases/latest) (tự động build công khai trên GitHub Actions).
 - Script [`scripts/oem-soft-sleep.sh`](scripts/oem-soft-sleep.sh) chỉ đưa app rác thuộc **Nhóm A (UID độc lập)** vào trạng thái hạn chế chạy nền (`RUN_ANY_IN_BACKGROUND ignore` + `standby-bucket restricted`), hoàn toàn có thể đảo ngược bằng `wake` và không làm lỗi boot/OTA.
 - **Không bao giờ** đưa các gói dùng chung `android.uid.system` (`uid=1000`) vào danh sách đóng băng.
+- Chạy thử thành công trên máy khác? Chia sẻ tên cảm biến qua [**Mẫu báo cáo thiết bị**](https://github.com/classic180393-vn/android-tablet-sleep-guard/issues/new/choose) để mở rộng cộng đồng!
 
 ## 5. Giấy phép
 Phát hành theo giấy phép mã nguồn mở **MIT** ([LICENSE](LICENSE)).

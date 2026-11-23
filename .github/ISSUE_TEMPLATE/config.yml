@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Quickstart & Architecture Docs
+    url: https://github.com/classic180393-vn/android-tablet-sleep-guard#readme
+    about: Check setup steps, E-Core pinning, and Dark-Bag guard configuration

@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -20,5 +23,28 @@ jobs:
           bash -n install.sh scripts/*.sh android/bt-battery-helper/build.sh
       - name: Run Unit Tests
         run: npm test
-      - name: Check Android Helper Java Sources
-        run: find android/bt-battery-helper/src -name '*.java' -print
+      - name: Build Android BT Battery Helper APK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Compile & Verify APK
+        run: |
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          BT_DIR="$(find "$SDK_ROOT/build-tools" -maxdepth 1 -mindepth 1 -type d | sort -V | tail -n 1)"
+          JAR_PATH="$(find "$SDK_ROOT/platforms" -maxdepth 2 -name 'android.jar' | sort -V | tail -n 1)"
+          echo "Using build-tools: $BT_DIR"
+          echo "Using android.jar: $JAR_PATH"
+          echo "$BT_DIR" >> "$GITHUB_PATH"
+          export PATH="$BT_DIR:$PATH"
+          export ANDROID_JAR="$JAR_PATH"
+          export USE_EPHEMERAL_KEYSTORE=1
+          export OUT_APK="${{ runner.temp }}/atsg_btbattery.apk"
+          bash android/bt-battery-helper/build.sh
+          apksigner verify --print-certs "$OUT_APK"
+      - name: Upload CI APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: atsg_btbattery-ci-apk
+          path: ${{ runner.temp }}/atsg_btbattery.apk
+          retention-days: 14

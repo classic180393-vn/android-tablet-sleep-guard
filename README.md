@@ -86,12 +86,19 @@ tablet-guard bt-sync             # Pull Bluetooth keyboard/mouse/stylus battery 
 tablet-guard bt-report           # View calibrated keyboard battery drain rate & history
 ```
 
-### 4. Optional: Build Bluetooth Battery Helper APK
+### 4. Optional: Bluetooth Battery Helper APK
+**Option A — Prebuilt Release APK (No SDK Required):**
+Download `atsg_btbattery.apk` from [**GitHub Releases**](https://github.com/classic180393-vn/android-tablet-sleep-guard/releases/latest) (built cleanly on GitHub Actions CI from `android/bt-battery-helper/`), then install via ADB or file manager:
+```bash
+adb install -r -g atsg_btbattery.apk
+adb shell "appops set com.atsg.btbattery MANAGE_EXTERNAL_STORAGE allow"
+```
+
+**Option B — Build From Source on Termux/Linux:**
 If you have `aapt2`, `d8`, `apksigner`, `javac`, and an Android platform SDK (`android.jar`):
 ```bash
 cd android/bt-battery-helper
 bash build.sh
-# Install via ADB:
 adb install -r -g dist/atsg_btbattery.apk
 adb shell "appops set com.atsg.btbattery MANAGE_EXTERNAL_STORAGE allow"
 ```
@@ -121,12 +128,14 @@ Xem hướng dẫn đầy đủ bằng Tiếng Việt tại [**README.vi.md**](R
 
 ---
 
-## Development & Tests
+## Development, Tests & Contributing
 
 ```bash
 npm run lint
 npm test
 ```
+
+Running on another Android tablet or ROM (OneUI, HyperOS, ColorOS, ZUI)? Share your `termux-sensor -l` Hall/Light names via the [**Device Compatibility Issue Template**](https://github.com/classic180393-vn/android-tablet-sleep-guard/issues/new/choose)!
 
 ## License
 

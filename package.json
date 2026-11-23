@@ -1,0 +1,36 @@
+{
+  "name": "android-tablet-sleep-guard",
+  "version": "1.0.0",
+  "description": "Apple App-Nap & Lid/Dark-Bag Deep-Freeze Guard + RLE Diff Battery Telemetry & Bluetooth Peripheral Battery Tracker for Android Tablets on Termux",
+  "main": "src/lid-guard.js",
+  "bin": {
+    "tablet-guard": "bin/tablet-guard.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "lint": "node --check bin/tablet-guard.js src/*.js test/*.test.js && bash -n install.sh scripts/*.sh",
+    "start": "node bin/tablet-guard.js daemon start",
+    "status": "node bin/tablet-guard.js status"
+  },
+  "keywords": [
+    "termux",
+    "android",
+    "tablet",
+    "battery",
+    "deep-doze",
+    "hall-sensor",
+    "bluetooth",
+    "power-management",
+    "linux",
+    "e-core"
+  ],
+  "author": "classic180393-vn",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/classic180393-vn/android-tablet-sleep-guard.git"
+  }
+}

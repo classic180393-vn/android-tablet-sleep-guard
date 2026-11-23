@@ -1,0 +1,37 @@
+{
+  "deviceName": "Android Tablet (Termux)",
+  "ecoCpuCores": "0,1",
+  "ecoNice": 10,
+  "hallSensorPattern": "hall|magnetic|lid",
+  "lightSensorPattern": "light|als|lux",
+  "darkBagGuardNoAdb": true,
+  "darkLuxThreshold": 0.8,
+  "darkBagConfirmSec": 180,
+  "screenOffBackpackSec": 45,
+  "lidSettleDelayMs": 2000,
+  "freezeWhenChargingLid": false,
+  "forceDeviceIdleOnFreeze": true,
+  "oemSoftSleepPreset": "none",
+  "oemStoppablePackages": [],
+  "freezeNativeWorkerRegex": "",
+  "autoPinHelperRegex": "tablet-guard|battery-habit|lid-guard",
+  "btSnapshotPath": "/storage/emulated/0/Download/.atsg_bt_battery.json",
+  "btHelperPackage": "com.atsg.btbattery",
+  "btDevices": {
+    "keyboard": {
+      "pattern": "Wireless Keyboard|Keyboard|BT.*Keyboard",
+      "name": "Wireless Bluetooth Keyboard",
+      "designMah": 500
+    },
+    "mouse": {
+      "pattern": "Mouse|BT.*Mouse",
+      "name": "Bluetooth Mouse",
+      "designMah": 1000
+    },
+    "pen": {
+      "pattern": "Stylus|Pen",
+      "name": "Bluetooth Stylus",
+      "designMah": 60
+    }
+  }
+}

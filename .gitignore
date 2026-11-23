@@ -1,0 +1,17 @@
+node_modules/
+data/
+logs/
+*.log
+*.pid
+*.tmp*
+*.apk
+*.keystore
+*.jks
+*.pem
+*.p12
+dist/
+build/
+.DS_Store
+.env
+.env.*
+config.local.json

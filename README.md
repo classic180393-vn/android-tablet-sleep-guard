@@ -8,6 +8,8 @@
 
 **macOS-style App-Nap, E-Core CPU Pinning, Magnetic Lid / Dark-Bag Deep-Freeze Guard, RLE-Diff Battery Telemetry & Bluetooth Keyboard Battery Tracker for Android Tablets running Termux.**
 
+![Android Tablet Sleep Guard Banner](docs/images/banner.png)
+
 > 🌐 **Languages:** [English](#why-android-tablet-sleep-guard) · [Tiếng Việt (Bản hướng dẫn chi tiết)](README.vi.md)
 
 ---
@@ -85,6 +87,8 @@ tablet-guard battery             # Print tablet discharge analytics (%/h, mA, W,
 tablet-guard bt-sync             # Pull Bluetooth keyboard/mouse/stylus battery & record diff
 tablet-guard bt-report           # View calibrated keyboard battery drain rate & history
 ```
+
+![Terminal Demo Output](docs/images/terminal-demo.png)
 
 ### 4. Optional: Bluetooth Battery Helper APK
 **Option A — Prebuilt Release APK (No SDK Required):**

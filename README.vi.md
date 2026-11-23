@@ -2,6 +2,8 @@
 
 Bộ công cụ tối ưu pin & chống tụt pin ngầm dành cho máy tính bảng Android chạy Termux (đạt mức tiêu hao chờ qua đêm chỉ **`~0,2–0,3%/giờ`** thay vì **`1,5–3%/giờ`** khi bị kẹt Wake-Lock).
 
+![Android Tablet Sleep Guard](docs/images/banner.png)
+
 ## 1. Hệ thống giải quyết vấn đề gì?
 - **Chống thức giả trong balo/túi xách:** Nhiều bàn phím bao da nam châm dễ bị xê dịch làm cảm biến Hall báo "Mở nắp". `Lid Guard` kiểm tra thêm **cảm biến ánh sáng (`darkLuxThreshold = 0.8 lux`)** — nếu môi trường tối om và đang rút sạc, máy giữ nguyên trạng thái ngủ đông.
 - **Chống rò `Wake-Lock` từ Termux:** Chủ động chạy `termux-wake-unlock` có kiểm chứng lại bằng `dumpsys power` (khi nối ADB) và kích hoạt `dumpsys deviceidle force-idle`.
@@ -26,6 +28,8 @@ tablet-guard battery        # Xem thống kê pin & hiệu quả gộp diff RLE
 tablet-guard bt-sync        # Đo pin bàn phím/chuột/bút BT ngay lập tức
 tablet-guard bt-report      # Xem tốc độ hao thực tế (%/ngày) của bàn phím rời
 ```
+
+![Demo Terminal Output](docs/images/terminal-demo.png)
 
 ## 4. Lưu ý an toàn với gói hệ thống OEM & Tải APK dựng sẵn
 - Nếu chỉ cần đo pin bàn phím Bluetooth rời mà không muốn tự biên dịch Java, tải sẵn `atsg_btbattery.apk` tại trang [**Releases**](https://github.com/classic180393-vn/android-tablet-sleep-guard/releases/latest) (tự động build công khai trên GitHub Actions).
